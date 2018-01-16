@@ -1,0 +1,27 @@
+{
+  "name": "slacklib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf src/**/*.d.ts src/**/*.js src/**/*.js.map",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "needle": "^2.1.0",
+    "ws": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/needle": "^2.0.2",
+    "@types/node": "^9.3.0",
+    "@types/ws": "^3.2.1",
+    "prettier": "^1.10.2",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.6.2"
+  },
+  "typings": "src/index.d.ts"
+}
