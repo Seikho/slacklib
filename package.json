@@ -17,6 +17,7 @@
   },
   "typings": "src/index.d.ts",
   "scripts": {
+    "prepare": "yarn build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf src/**/*.d.ts src/**/*.js src/**/*.js.map",
     "build": "tsc"
