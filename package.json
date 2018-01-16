@@ -1,16 +1,8 @@
 {
   "name": "slacklib",
   "version": "1.0.0",
-  "description": "",
+  "description": "Slack Bot API using TypeScript with rate limiting for NodeJS",
   "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf src/**/*.d.ts src/**/*.js src/**/*.js.map",
-    "build": "tsc"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "needle": "^2.1.0",
     "ws": "^4.0.0"
@@ -23,5 +15,28 @@
     "rimraf": "^2.6.2",
     "typescript": "^2.6.2"
   },
-  "typings": "src/index.d.ts"
+  "typings": "src/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf src/**/*.d.ts src/**/*.js src/**/*.js.map",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seikho/slacklib.git"
+  },
+  "keywords": [
+    "slack",
+    "bot",
+    "api",
+    "typescript",
+    "rate",
+    "limit"
+  ],
+  "author": "Carl Winkler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seikho/slacklib/issues"
+  },
+  "homepage": "https://github.com/seikho/slacklib#readme"
 }
