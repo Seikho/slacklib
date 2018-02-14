@@ -39,7 +39,7 @@ export async function directMessage(
 }
 
 async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token: string) {
-  const existing = ims.find(im => im.user === userId)
+  const existing = ims.find(im => !!im && im.user === userId)
   if (existing) {
     return {
       im: existing,
