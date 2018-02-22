@@ -1,6 +1,6 @@
 {
   "name": "slacklib",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Slack Bot API using TypeScript with rate limiting for NodeJS",
   "main": "src/index.js",
   "dependencies": {
@@ -15,11 +15,11 @@
     "rimraf": "^2.6.2",
     "typescript": "^2.6.2"
   },
-  "typings": "src/index.d.ts",
+  "typings": "types/index.d.ts",
   "scripts": {
     "prepare": "yarn build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf src/**/*.d.ts src/**/*.js src/**/*.js.map",
+    "clean": "rimraf dist/**/*.dts src/**/*.d.ts src/**/*.js src/**/*.js.map",
     "build": "tsc"
   },
   "repository": {

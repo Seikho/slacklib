@@ -16,9 +16,6 @@
     "**/*?.js": {
       "when": "$(basename).tsx"
     },
-    "**/*.d.ts": {
-      "when": "$(basename).ts"
-    },
     "**/*.sqlite": true
   },
   "search.exclude": {
