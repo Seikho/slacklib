@@ -18,6 +18,8 @@ export type Info = {
 export type Channel = {
   id: string
   name: string
+  name_normalized: string
+  created: number
   creator: string
   is_archived: boolean
   is_general: boolean
@@ -34,5 +36,5 @@ export type Channel = {
 
 export type List = {
   ok: true
-  channels: Array<Pick<Info, 'channel'>>
+  channels: Channel[]
 }

@@ -5,7 +5,7 @@ import { sleep } from '../util'
 
 export async function getUser(userId: string, token: string, knownUsers: Users.User[] = []) {
   const url = `https://slack.com/api/users.info`
-  const existingUser = knownUsers.find(user => user.name === userId)
+  const existingUser = knownUsers.find(user => user.id === userId || user.name === userId)
   if (existingUser) {
     const result = await post<Users.Info>(url, { user: existingUser.id, token })
     return {
@@ -14,8 +14,8 @@ export async function getUser(userId: string, token: string, knownUsers: Users.U
     }
   }
 
-  const allUsers = await getUsers({ token })
-  const match = allUsers.find(user => user.name === userId)
+  const allUsers = await getUsers({}, token)
+  const match = allUsers.find(user => user.id === userId || user.name === userId)
   if (!match) {
     return {
       users: allUsers,

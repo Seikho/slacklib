@@ -1,7 +1,7 @@
 import { getSlackSocket, wrapSocket, Response } from './real-time/connect'
 import { EventEmitter } from 'events'
 import * as WebSocket from 'ws'
-import { Events, Chat, Users } from './types'
+import { Events, Chat, Users, Channel } from './types'
 import * as user from './user'
 import * as chat from './chat'
 import * as channels from './channel'
@@ -13,10 +13,12 @@ export interface Options {
 }
 
 export class SlackClient extends EventEmitter {
-  socket: WebSocket
-  self: Response['self']
+  socket: WebSocket = null as any
+  self: Response['self'] = null as any
+  team: Chat.Team = null as any
+
   users: Users.User[] = []
-  team: Chat.Team
+  channels: Channel.Channel[] = []
   ims: Chat.IM[] = []
 
   private token: string
@@ -33,6 +35,7 @@ export class SlackClient extends EventEmitter {
 
     this.socket = socket
     this.self = data.self
+    this.channels = data.channels
     this.users = data.users
     this.team = data.team
     this.ims = data.ims
@@ -62,11 +65,23 @@ export class SlackClient extends EventEmitter {
     return result.user
   }
 
-  getUsers = (options: user.ListOptions = { token: '' }) =>
-    user.getUsers({ ...options, token: this.token })
+  getUsers = async (options: user.ListOptions = {}) => {
+    const result = await user.getUsers(options, this.token)
+    this.users = result
+    return result
+  }
 
-  getChannel = (channelId: string) => channels.info(channelId, this.token)
-  getChannels = (options: channels.ListOptions) => channels.list(options)
+  getChannel = async (channelId: string) => {
+    const result = await channels.info(channelId, this.token, this.channels)
+    this.channels = result.channels
+    return result.channel
+  }
+
+  getChannels = async (options: channels.ListOptions = {}) => {
+    const result = await channels.list(options, this.token)
+    this.channels = result
+    return result
+  }
 
   onMessage(handler: (msg: Events.Event) => void) {
     this.on('message', handler)

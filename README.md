@@ -22,11 +22,11 @@ const bot = new SlackClient({ token: 'xoxc-abcdef-1234567890' })
 postMessage(msg: Message): Promise<Chat.Response>
 directMessage(user: string, msg: Message): Promise<Chat.Response>
 
-getUser(userId: string): Promise<Users.User>
-getUsers(options: ListOptions): Promise<Users.User[]>
+getUser(userNameOrId: string): Promise<Users.User>
+getUsers(options?: ListOptions): Promise<Users.User[]>
 
-getChannel(channelId: string): Promise<Channels.Channel>
-getChannels(options: ListOptions): Promise<Channels.Channel[]>
+getChannel(channelNameOrId: string): Promise<Channels.Channel>
+getChannels(options?: ListOptions): Promise<Channels.Channel[]>
 
 on(event: string, handler: (evt: Events.Event) => void)
 
