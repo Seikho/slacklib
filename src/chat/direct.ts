@@ -50,7 +50,7 @@ async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token:
 
   const user = users.find(user => user.name === userId || user.id === userId)
   if (!user) {
-    const allUsers = await getUsers({ token })
+    const allUsers = await getUsers({}, token)
     await sleep(1)
     const user = users.find(user => user.name === userId || user.id === userId)
     if (!user) {
