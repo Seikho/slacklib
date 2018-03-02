@@ -44,7 +44,7 @@ export class SlackClient extends EventEmitter {
   }
 
   postMessage = (message: Chat.PostMessage) => chat.post(message, this.token)
-  directMessage = async (user: string, msg: Chat.PostMessage) => {
+  directMessage = async (user: string, msg: Chat.PostPrivateMessage) => {
     const { ims, users, result } = await chat.directMessage(
       user,
       msg,
