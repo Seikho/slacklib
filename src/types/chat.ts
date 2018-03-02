@@ -11,6 +11,22 @@ export interface Message {
   team: string
 }
 
+export type PostPrivateMessage = {
+  text?: string
+
+  as_user?: boolean
+  attachments?: Attachment[]
+  icon_emoji?: string
+  icon_url?: string
+  link_names?: boolean
+  reply_broadcast?: boolean
+  thread_ts?: number | string
+  unurl_links?: boolean
+  unfurl_meadia?: boolean
+  username?: string
+  mrkdwn?: boolean
+}
+
 export type PostMessage = {
   channel: string
   text?: string

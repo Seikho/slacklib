@@ -5,7 +5,7 @@ import { sleep } from '../util'
 
 export async function directMessage(
   user: string,
-  chat: Chat.PostMessage,
+  chat: Chat.PostPrivateMessage,
   token: string,
   users: Users.User[],
   ims: Chat.IM[]
