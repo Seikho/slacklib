@@ -18,7 +18,7 @@ export async function info(channel: string, token: string, knownChannels: Channe
   }
 
   return {
-    channels: knownChannels.concat([result.channel]),
+    channels: result.channel ? [...knownChannels, result.channel] : knownChannels,
     channel: result.channel
   }
 }
