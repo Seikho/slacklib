@@ -17,7 +17,11 @@ export async function post<T>(url: string, form: Form) {
     }
   }
 
-  const result = await get<T>(url, opts, 'post', { ...form })
+  const result = await get<{ ok: boolean; error?: string } & T>(url, opts, 'post', { ...form })
+  if (!result.ok) {
+    const urlEnd = url.split('/').slice(-1)[0]
+    throw new Error(`Failed to POST /${urlEnd}: ${result.error || 'No error supplied'}`)
+  }
   return result
 }
 
