@@ -51,21 +51,24 @@ async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token:
   const user = users.find(user => user.name === userId || user.id === userId)
   if (!user) {
     const allUsers = await getUsers({}, token)
-    await sleep(1)
+    await sleep(0.25)
     const user = users.find(user => user.name === userId || user.id === userId)
     if (!user) {
-      return {
-        users: allUsers,
-        ims,
-        im: undefined
-      }
+      throw new Error(`Failed to IM.Open: Could not find user`)
     }
 
-    const result = await post<{ ok: boolean; im: Chat.IM }>(`https://slack.com/api/im.open`, {
-      token,
-      user: user.id,
-      return_im: true
-    })
+    const result = await post<{ ok: boolean; im: Chat.IM; error?: string }>(
+      `https://slack.com/api/im.open`,
+      {
+        token,
+        user: user.id,
+        return_im: true
+      }
+    )
+
+    if (!result.ok) {
+      throw new Error(`Failed to IM.Open: ${result.error as string}`)
+    }
 
     return {
       users: allUsers,
@@ -74,11 +77,18 @@ async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token:
     }
   }
 
-  const result = await post<{ ok: boolean; im: Chat.IM }>(`https://slack.com/api/im.open`, {
-    token,
-    user: user.id,
-    return_im: true
-  })
+  const result = await post<{ ok: boolean; im: Chat.IM; error?: string }>(
+    `https://slack.com/api/im.open`,
+    {
+      token,
+      user: user.id,
+      return_im: true
+    }
+  )
+
+  if (!result.ok) {
+    throw new Error(`Failed to IM.Open: ${result.error as string}`)
+  }
 
   return {
     users,
