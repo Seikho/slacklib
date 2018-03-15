@@ -18,8 +18,10 @@ export async function start(): Promise<SlackClient> {
   try {
     await waitTilReady(bot)
   } catch (ex) {
-    console.error('Failed to connect to Slack')
-    process.exit(1)
+    console.error('Failed to connect to Slack. Retrying in 3 seconds...')
+    return new Promise<SlackClient>(resolve => {
+      setTimeout(() => resolve(start()), 3000)
+    })
   }
 
   listenForCommands(bot)
