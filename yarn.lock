@@ -123,6 +123,10 @@ typescript@^2.6.2:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
+webscaledb@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/webscaledb/-/webscaledb-0.1.6.tgz#435ecca25d1e3d25bc6deb40d4216cbbc939e191"
+
 wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"

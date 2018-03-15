@@ -11,8 +11,22 @@ npm install slacklib --save
 
 ## Usage
 ```ts
+// With command wrappers
+import { setup } from 'slacklib'
+
+const bot = setup({ name: 'Bot' })
+
+bot.register('my-command', 'Description', async (bot, msg, cfg, params) => {
+  const user = bot.users.find(user => user.id === msg.user)
+  await bot.postMessage({ channel: bot.channel, text: `Msg recvd: ${params.join(' ')}`, ...cfg.defaultParams })
+  console.log('Message received from ', user!.name)
+})
+
+start()
+
+// Without the Bot command wrapper
 import { SlackClient } from 'slacklib'
-const bot = new SlackClient({ token: 'xoxc-abcdef-1234567890' })
+const client = new SlackClient({ token: 'xoxc-abcdef-1234567890' })
 ```
 
 ## API

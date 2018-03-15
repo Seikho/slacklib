@@ -1,13 +1,14 @@
 {
   "name": "slacklib",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "Slack Bot API using TypeScript with rate limiting for NodeJS",
   "main": "src/index.js",
   "dependencies": {
-    "needle": "^2.1.0",
-    "ws": "^4.0.0",
     "@types/needle": "^2.0.2",
-    "@types/ws": "^3.2.1"
+    "@types/ws": "^3.2.1",
+    "needle": "^2.1.0",
+    "webscaledb": "^0.1.6",
+    "ws": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^9.3.0",
