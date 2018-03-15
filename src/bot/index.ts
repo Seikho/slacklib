@@ -1,4 +1,4 @@
-export { setup } from './config'
+export { setup } from './config/index'
 export { readMessage } from './read'
 export { start, getBot } from './start'
 export * from './cmd'

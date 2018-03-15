@@ -1,4 +1,4 @@
-import { getConfig, Config } from '../config'
+import { getConfig, Config } from '../config/index'
 import { SlackClient } from '../../client'
 import { Chat } from '../../types'
 

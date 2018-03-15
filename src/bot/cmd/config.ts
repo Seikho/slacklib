@@ -1,4 +1,4 @@
-import { getConfig, setConfig, getPrivateConfigKeyNames, getSetableKeys } from '../config'
+import { getConfig, setConfig, getPrivateConfigKeyNames, getSetableKeys } from '../config/index'
 import { internalRegister } from '../'
 
 export const setableKeys = {
