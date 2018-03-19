@@ -30,6 +30,7 @@ export function internalRegister(command: string, description: string, callback:
 
 export async function dispatch(bot: SlackClient, msg: Chat.Message, text: string) {
   const cfg = getConfig()
+
   const [cmd, ...params] = text.trim().split(' ')
   if (text === '') {
     await dispatch(bot, msg, 'first')

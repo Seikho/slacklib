@@ -75,6 +75,7 @@ export async function initialiseConfig(config: any) {
   try {
     fs.statSync(DB_NAME)
   } catch (ex) {
+    makeDbDirectory()
     fs.writeFileSync(DB_NAME, '{}')
     await backupAsync({ token: process.env.SLACK_TOKEN || '', ...defaultConfig, ...config })
   }
@@ -84,6 +85,15 @@ export async function initialiseConfig(config: any) {
     throw new Error('ConfigError: Token is not configured')
   }
   await backupAsync({ ...config, ...currentConfig })
+}
+
+function makeDbDirectory() {
+  const directory = path.join(process.cwd(), 'database')
+  try {
+    fs.readdirSync(directory)
+  } catch (_) {
+    fs.mkdirSync(directory)
+  }
 }
 
 export type DefaultConfig = typeof defaultConfig

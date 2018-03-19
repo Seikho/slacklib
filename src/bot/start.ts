@@ -3,7 +3,7 @@ import { dispatch } from './cmd'
 import { SlackClient } from '../client'
 import { Chat } from '../types'
 
-let _bot: any = null
+let _bot: SlackClient | null = null
 let botResolveFn: Function
 let botReady = new Promise(resolve => (botResolveFn = resolve))
 
@@ -17,6 +17,17 @@ export async function start(): Promise<SlackClient> {
   const bot = new SlackClient({ token: config.token })
   try {
     await waitTilReady(bot)
+
+    const originalPM = bot.postMessage
+    const originalDM = bot.directMessage
+
+    const botPostMessage: typeof originalPM = msg =>
+      originalPM({ ...getConfig().defaultParams, ...msg })
+    const botDirectMessage: typeof originalDM = (id, msg) =>
+      originalDM(id, { ...getConfig().defaultParams, ...msg })
+
+    bot.postMessage = botPostMessage
+    bot.directMessage = botDirectMessage
   } catch (ex) {
     console.error('Failed to connect to Slack. Retrying in 3 seconds...')
     return new Promise<SlackClient>(resolve => {
@@ -36,7 +47,7 @@ export async function start(): Promise<SlackClient> {
 
 export async function getBot(): Promise<SlackClient> {
   await botReady
-  return _bot
+  return _bot!
 }
 
 function listenForCommands(bot: SlackClient) {
