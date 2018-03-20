@@ -1,5 +1,6 @@
 import { post } from '../fetch'
 import { Chat } from '../types'
+import { queue } from '../queue'
 
 export default function postMessage(chat: Chat.PostMessage, token: string) {
   const attachments = JSON.stringify(chat.attachments || [])
@@ -8,5 +9,8 @@ export default function postMessage(chat: Chat.PostMessage, token: string) {
     ...chat,
     attachments
   }
-  return post<Chat.Response>(`https://slack.com/api/chat.postMessage`, { ...options, token })
+
+  return queue(() =>
+    post<Chat.Response>(`https://slack.com/api/chat.postMessage`, { ...options, token })
+  )
 }

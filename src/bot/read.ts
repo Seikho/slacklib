@@ -43,9 +43,3 @@ export function readMessage(
     bot.on('message', callback)
   })
 }
-
-export function sleep(milliseconds: number) {
-  return new Promise(resolve => {
-    setTimeout(() => resolve(), milliseconds)
-  })
-}

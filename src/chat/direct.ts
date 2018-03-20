@@ -1,7 +1,7 @@
 import { post } from '../fetch'
 import { Chat, Users } from '../types'
 import { getUsers } from '../user/list'
-import { sleep } from '../util'
+import { queue } from '../queue'
 
 export async function directMessage(
   user: string,
@@ -26,10 +26,12 @@ export async function directMessage(
     attachments
   }
 
-  const result = await post<Chat.Response>(`https://slack.com/api/chat.postMessage`, {
-    ...options,
-    token
-  })
+  const result = await queue(() =>
+    post<Chat.Response>(`https://slack.com/api/chat.postMessage`, {
+      ...options,
+      token
+    })
+  )
 
   return {
     users: info.users,
@@ -52,26 +54,28 @@ async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token:
   if (!user) {
     const allUsers = await getUsers({}, token)
 
-    await sleep(0.25)
-
     user = users.find(user => user.name === userId || user.id === userId)
     if (!user) {
       throw new Error(`Failed to IM.Open: Could not find user`)
     }
   }
 
-  const result = await post<{ ok: boolean; im: Chat.IM; error?: string }>(
-    `https://slack.com/api/im.open`,
-    { token, user: user.id, return_im: true }
+  const result = await queue(() =>
+    post<{ ok: boolean; im: Chat.IM; error?: string }>(`https://slack.com/api/im.open`, {
+      token,
+      user: user!.id,
+      return_im: true
+    })
   )
 
   if (!result.ok) {
     throw new Error(`Failed to IM.Open: ${result.error}`)
   }
 
-  const allIMs = await post<{ ok: boolean; ims: Chat.IM[]; error?: string }>(
-    `https://slack.com/api/im.list`,
-    { token }
+  const allIMs = await queue(() =>
+    post<{ ok: boolean; ims: Chat.IM[]; error?: string }>(`https://slack.com/api/im.list`, {
+      token
+    })
   )
 
   if (!allIMs.ok) {

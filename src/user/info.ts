@@ -1,7 +1,7 @@
 import { post } from '../fetch'
 import { getUsers } from './list'
 import { Users } from '../types'
-import { sleep } from '../util'
+import { queue } from '../queue'
 
 export async function getUser(userId: string, token: string, knownUsers: Users.User[] = []) {
   const url = `https://slack.com/api/users.info`
@@ -23,11 +23,12 @@ export async function getUser(userId: string, token: string, knownUsers: Users.U
     }
   }
 
-  await sleep(1)
-  const result = await post<Users.Info>(`https://slack.com/api/users.info`, {
-    user: match.id,
-    token
-  })
+  const result = await queue(() =>
+    post<Users.Info>(`https://slack.com/api/users.info`, {
+      user: match.id,
+      token
+    })
+  )
 
   return {
     users: allUsers,

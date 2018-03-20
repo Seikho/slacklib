@@ -1,6 +1,6 @@
 {
   "name": "slacklib",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Slack Bot API using TypeScript with rate limiting for NodeJS",
   "main": "src/index.js",
   "dependencies": {
