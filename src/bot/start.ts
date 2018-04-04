@@ -58,7 +58,7 @@ function listenForCommands(bot: SlackClient) {
       return
     }
 
-    if (data.subtype === 'channel_join') {
+    if (data.subtype === 'channel_join' || data.subtype === 'group_join') {
       return
     }
 
