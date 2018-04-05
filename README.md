@@ -1,6 +1,11 @@
 # Slacklib
 > Slack Bot API using TypeScript with rate limiting for NodeJS
 
+For some examples on how to use this library see:
+- [Bot Starter](https://github.com/1000team/bot-starter)
+- [Standup Bot](https://github.com/seikho/slack-standup-bot)
+- [Roshambot](https://github.com/1000team/roshambo)
+
 *This API surface is incomplete! Feel free to expand the API by contributing.*
 
 ## Installation
