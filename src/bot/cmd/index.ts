@@ -37,6 +37,9 @@ export async function dispatch(bot: SlackClient, msg: Chat.Message, text: string
     return
   }
 
+  const user =
+    bot.users.find(user => user.id === msg.user) || bot.bots.find(bot => bot.id === msg.bot_id)
+
   if (!listeners[cmd]) {
     await bot.postMessage({
       channel: msg.channel,
@@ -44,7 +47,6 @@ export async function dispatch(bot: SlackClient, msg: Chat.Message, text: string
       ...cfg.defaultParams
     })
 
-    const user = bot.users.find(user => user.id === msg.user)
     console.error(
       `[${user!.name}/${msg.type}/${msg.subtype || 'no subtype'}] Unrecognized command: ${cmd}: ${
         msg.text
@@ -53,7 +55,6 @@ export async function dispatch(bot: SlackClient, msg: Chat.Message, text: string
     return
   }
 
-  const user = bot.users.find(user => user.id === msg.user)
   console.log(`User: ${user!.name} | Cmd: ${cmd} | Params: ${params}`)
   listeners[cmd].callback(bot, msg, cfg, params)
 }

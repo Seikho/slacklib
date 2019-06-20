@@ -17,6 +17,7 @@ export interface Response {
 
   team: Chat.Team
   users: Users.User[]
+  bots: Users.Bot[]
   channels: Channel.Channel[]
   ims: Chat.IM[]
 }

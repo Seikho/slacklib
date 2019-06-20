@@ -82,7 +82,7 @@ export type Attachment = {
   title?: string
   pretext?: string
   text?: string
-  mrkdwn_in?: Array<'text' | 'pretext'>
+  mrkdwn_in?: Array<'text' | 'pretext' | string>
   color?: string
   author_name?: string
   author_link?: string

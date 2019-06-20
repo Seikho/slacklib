@@ -17,6 +17,7 @@ export class SlackClient extends EventEmitter {
   self: Response['self'] = null as any
   team: Chat.Team = null as any
 
+  bots: Users.Bot[] = []
   users: Users.User[] = []
   channels: Channel.Channel[] = []
   ims: Chat.IM[] = []
@@ -39,6 +40,7 @@ export class SlackClient extends EventEmitter {
     this.users = data.users
     this.team = data.team
     this.ims = data.ims
+    this.bots = data.bots
 
     wrapSocket(socket, this)
   }

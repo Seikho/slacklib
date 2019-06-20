@@ -7,8 +7,6 @@ import {
   DefaultParams
 } from './setup'
 import { toRegister } from '../cmd'
-import { SlackClient } from '../../client'
-import { Chat } from '../../types'
 
 export { BaseConfig as Config, DefaultParams }
 
@@ -18,7 +16,7 @@ export interface SetupConfig extends DefaultConfig {
 
 export function setup<TConfig extends {}>(
   config: TConfig & Partial<SetupConfig>,
-  preventRetrieval: Array<keyof TConfig> = []
+  preventRetrieval: string[] = []
 ) {
   if (setupCalled) {
     throw new Error('Setup has already been called')
@@ -72,6 +70,7 @@ let _setter = (_key: keyof DefaultConfig, _value: any): Promise<BaseConfig> => {
 }
 
 const preventRetrieving: string[] = []
+
 export function getPrivateConfigKeyNames() {
   return preventRetrieving.slice()
 }

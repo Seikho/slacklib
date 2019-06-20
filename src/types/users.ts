@@ -41,3 +41,16 @@ export type List = {
     next_cursor?: string
   }
 }
+
+export type Bot = {
+  id: string
+  app_id: string
+  name: string
+  updated: number
+  deleted: boolean
+  icons: {
+    image_36: string
+    image_48: string
+    image_72: string
+  }
+}
