@@ -30,7 +30,7 @@ export function readMessage(
 
       const isCommand = data.type === 'message' && text.startsWith(`<@${bot.self.id}>`)
       const userId = typeof user === 'string' ? user : user.id
-      const isCorrectUser = data.user === userId
+      const isCorrectUser = data.user === userId || data.bot_id === userId
 
       if (isCorrectChannel && !isCommand && isCorrectUser) {
         bot.removeListener('message', callback)

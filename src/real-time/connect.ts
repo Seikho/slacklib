@@ -41,6 +41,10 @@ export function wrapSocket(socket: WebSocket, emitter: EventEmitter) {
       reconnectUrl = json.url
     }
 
+    if (json.type === 'message' && json.bot_id) {
+      json.user = json.bot_id
+    }
+
     emitter.emit('message', json)
   })
 

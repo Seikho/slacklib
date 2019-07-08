@@ -1,9 +1,4 @@
-export type Event =
-  | PresenceChange
-  | Message
-  | UserTyping
-  | ReconnectUrl
-  | Hello
+export type Event = PresenceChange | Message | UserTyping | ReconnectUrl | Hello
 
 export type Hello = {
   type: 'hello'
@@ -25,6 +20,7 @@ export type Message = {
   text: string
   ts: string
 
+  bot_id?: string
   event_ts?: string
   source_team?: string
   subtype?: string
@@ -37,6 +33,6 @@ export type UserTyping = {
 }
 
 export type ReconnectUrl = {
-  type: 'reconnect_url',
+  type: 'reconnect_url'
   url: string
 }
