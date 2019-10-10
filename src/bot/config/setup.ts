@@ -78,7 +78,13 @@ export async function initialiseConfig(config: any) {
   } catch (ex) {
     makeDbDirectory()
     fs.writeFileSync(DB_NAME, '{}')
-    await backupAsync({ token: process.env.SLACK_TOKEN || '', ...defaultConfig, ...config })
+    const envToken = process.env.SLACK_TOKEN
+    const nextConfig = { token: process.env.SLACK_TOKEN || '', ...defaultConfig, ...config }
+    if (envToken && envToken !== nextConfig.token) {
+      nextConfig.token = envToken
+    }
+
+    await backupAsync(nextConfig)
   }
 
   const currentConfig = await restoreAsync()
