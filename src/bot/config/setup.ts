@@ -88,7 +88,7 @@ export async function initialiseConfig(config: any) {
   }
 
   const currentConfig = await restoreAsync()
-  if (!currentConfig.token) {
+  if (!currentConfig.token && !config.token) {
     throw new Error('ConfigError: Token is not configured')
   }
   await backupAsync({ ...config, ...currentConfig })
