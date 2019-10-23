@@ -6,7 +6,9 @@
     "declaration": true,
     "strict": true,
     "sourceMap": true,
-    "lib": ["es2015", "es2016", "es2017"]
+    "lib": ["es2015", "es2016", "es2017"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": ["build", "node_modules", "types"]
 }
