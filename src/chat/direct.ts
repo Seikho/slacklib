@@ -54,7 +54,7 @@ async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token:
   if (!user) {
     const allUsers = await getUsers({}, token)
 
-    user = users.find(user => user.name === userId || user.id === userId)
+    user = allUsers.find(user => user.name === userId || user.id === userId)
     if (!user) {
       throw new Error(`Failed to IM.Open: Could not find user`)
     }
