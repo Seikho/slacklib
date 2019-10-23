@@ -82,7 +82,7 @@ async function getIM(userId: string, users: Users.User[], ims: Chat.IM[], token:
     throw new Error(`Failed to IM.Open->IM.List: ${allIMs.error}`)
   }
 
-  const im = allIMs.ims.find(i => i.user === user.id)
+  const im = allIMs.ims.find(i => i.user === user!.id)
   return {
     users,
     im,
